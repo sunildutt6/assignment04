@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block content %}
+<section class="card form-card">
+  <h2 class="page-title">Add Product</h2>
+
+  <form method="POST" class="form-layout">
+    <div class="form-group">
+      <label for="name">Product Name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" step="0.01" id="price" name="price" required>
+      </div>
+
+      <div class="form-group">
+        <label for="stock">Stock</label>
+        <input type="number" id="stock" name="stock" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="categoryId">Category</label>
+      <select id="categoryId" name="categoryId" required>
+        {% for category in categories %}
+          <option value="{{ category.categoryId }}">{{ category.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Add Product</button>
+      <a class="btn" href="{{ url_for('products_list') }}">Back to products</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

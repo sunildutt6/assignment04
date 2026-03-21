@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Add Category{% endblock %}
+
+{% block content %}
+<section class="card form-card">
+  <h2 class="page-title">Add Category</h2>
+
+  <form method="POST" class="form-layout">
+    <div class="form-group">
+      <label for="name">Category Name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Add Category</button>
+      <a class="btn" href="{{ url_for('products_list') }}">Back to products</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

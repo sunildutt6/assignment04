@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ product.name }} | ShoeStore
+{% endblock %}
+
+{% block content %}
+
+<section class="card product">
+  <h2 class="page-title">{{ product.name }}</h2>
+  <p class="price">NOK {{ product.price }}</p>
+  <p>Stock: {{ product.stock }}</p>
+  <p>Category: {{ product.category }}</p>
+
+  <div class="actions">
+    <a class="btn primary" href="{{ url_for('products_list') }}">Back to products</a>
+    <a class="btn" href="{{ url_for('index') }}">Back to home</a>
+  </div>
+</section>
+
+{% endblock %}

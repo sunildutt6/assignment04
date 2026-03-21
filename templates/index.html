@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Home | ShoeStore{% endblock %}
+
+{% block content %}
+
+<section class="card hero">
+  <div class="flex-col">
+    <h2 class="page-title">ShoeStore</h2>
+
+    {% if user %}
+      <h2>Welcome {{ user.name }} as {{ user.role }}</h2>
+    {% else %}
+      <h2>Welcome Guest</h2>
+    {% endif %}
+
+    <aside class="card flex-col" aria-label="Store summary">
+      <h3 class="page-title">Today’s summary</h3>
+      <ul>
+        <li>New arrivals: 3 running shoes</li>
+        <li>Low stock: Classic Sneakers (Size 42)</li>
+        <li>Next shipment: Wednesday</li>
+      </ul>
+    </aside>
+  </div>
+
+  <img src="{{ url_for('static', filename='images/image-2.jpg') }}" alt="Shoes on display (hero image)" />
+</section>
+
+{% endblock %}
