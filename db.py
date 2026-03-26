@@ -1,14 +1,16 @@
 import mysql.connector
 from flask import current_app
 
+
 def get_db_connection():
     conn = mysql.connector.connect(
-        host=current_app.config['MYSQL_HOST'],
-        user=current_app.config['MYSQL_USER'],
-        password=current_app.config['MYSQL_PASSWORD'],
-        database=current_app.config['MYSQL_DATABASE']
+        host=current_app.config["MYSQL_HOST"],
+        user=current_app.config["MYSQL_USER"],
+        password=current_app.config["MYSQL_PASSWORD"],
+        database=current_app.config["MYSQL_DATABASE"]
     )
     return conn
+
 
 def get_single_user():
     conn = get_db_connection()
@@ -21,6 +23,20 @@ def get_single_user():
     cursor.close()
     conn.close()
     return user
+
+
+def get_user_by_username(username):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    query = "SELECT * FROM Users WHERE name = %s"
+    cursor.execute(query, (username,))
+    user = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+    return user
+
 
 def get_all_products():
     conn = get_db_connection()
@@ -37,6 +53,7 @@ def get_all_products():
     cursor.close()
     conn.close()
     return products
+
 
 def get_product_by_id(product_id):
     conn = get_db_connection()
@@ -60,6 +77,7 @@ def get_product_by_id(product_id):
     conn.close()
     return product
 
+
 def get_all_categories():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
@@ -72,6 +90,7 @@ def get_all_categories():
     conn.close()
     return categories
 
+
 def insert_category(name):
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -82,6 +101,7 @@ def insert_category(name):
 
     cursor.close()
     conn.close()
+
 
 def insert_product(name, price, stock, categoryId):
     conn = get_db_connection()

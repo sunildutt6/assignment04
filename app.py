@@ -6,7 +6,8 @@ from db import (
     get_product_by_id,
     insert_category,
     insert_product,
-    get_single_user
+    get_single_user,
+    get_user_by_username
 )
 
 app = Flask(__name__)
@@ -27,24 +28,24 @@ def register():
 def check_username():
     username = request.args.get("username", "").strip()
 
-    if username== "":
+    if username == "":
         return jsonify({
-            "available":False,
+            "available": False,
             "message": "Username required"
         })
-    taken_usernames = ["admin", "sharif", "sunil", "khalid" , "newuser123"]
 
-    if username.lower() in taken_usernames:
+    user = get_user_by_username(username)
+
+    if user:
         return jsonify({
             "available": False,
             "message": "Username is already taken"
         })
 
     return jsonify({
-        "available":True,
-        "message":""
+        "available": True,
+        "message": ""
     })
-
 
 @app.route("/")
 def index():
